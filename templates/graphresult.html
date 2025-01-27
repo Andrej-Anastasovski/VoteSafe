@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand"><a href="{{ url_for('index') }}">VoteSafe</a></div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('results') }}" class="nav-link">Results</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% if sorted_presidents and sorted_parties %}
+            <!-- Turnout Section -->
+            <div class="turnout-section">
+                <h2>Voter Turnout</h2>
+                <div class="turnout-stats">
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-percentage="{{ turnout }}"></div>
+                    </div>
+                    <hr>    
+                    <span class="stat-value">{{ "{:,}".format(total_votes) }} voters</span>
+                    <span class="percentage">{{ "%.1f"|format(turnout) }}%</span>
+                    <span class="total-voters">of {{ "{:,}".format(total_voters) }} registered voters</span>
+                </div>
+            </div>
+
+            <!-- Top Winners -->
+            <div class="winners-grid">
+                <!-- Leading President -->
+                <div class="winner-section">
+                    <h2>Leading Presidential Candidate</h2>
+                    <div class="winner-card">
+                        <div class="winner-content full-size">
+                            <img src="{{ url_for('static', filename='images/president.png') }}" alt="President">
+                            <h3>{{ sorted_presidents[0][0] }}</h3>
+                            <div class="vote-bar">
+                                <div class="progress-fill" data-percentage="{{ (sorted_presidents[0][1]/total_votes*100)|round(1) }}"></div>
+                            </div>
+                            <div class="vote-info">
+                                <span class="vote-count">{{ "{:,}".format(sorted_presidents[0][1]) }} votes</span>
+                                <span class="vote-percent">{{ "%.1f"|format(sorted_presidents[0][1]/total_votes*100) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leading Party -->
+                <div class="winner-section">
+                    <h2>Leading Political Party</h2>
+                    <div class="winner-card">
+                        <div class="winner-content full-size">
+                            <img src="{{ url_for('static', filename='images/party.png') }}" alt="Party">
+                            <h3>{{ sorted_parties[0][0] }}</h3>
+                            <div class="vote-bar">
+                                <div class="progress-fill" data-percentage="{{ (sorted_parties[0][1]/total_votes*100)|round(1) }}"></div>
+                            </div>
+                            <div class="vote-info">
+                                <span class="vote-count">{{ "{:,}".format(sorted_parties[0][1]) }} votes</span>
+                                <span class="vote-percent">{{ "%.1f"|format(sorted_parties[0][1]/total_votes*100) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Candidates -->
+            <div class="other-candidates">
+                <h2>Other Presidential Candidates</h2>
+                <div class="others-grid">
+                    {% for president, votes in sorted_presidents[1:] %}
+                    <div class="candidate-card">
+                        <img src="{{ url_for('static', filename='images/president.png') }}" alt="President">
+                        <h4>{{ president }}</h4>
+                        <div class="vote-bar">
+                            <div class="progress-fill" data-percentage="{{ (votes/total_votes*100)|round(1) }}"></div>
+                        </div>
+                        <div class="vote-info">
+                            <span class="vote-count">{{ "{:,}".format(votes) }} votes</span>
+                            <span class="vote-percent">{{ "%.1f"|format(votes/total_votes*100) }}%</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Other Political Parties -->
+            <div class="other-candidates">
+                <h2>Other Political Parties</h2>
+                <div class="others-grid">
+                    {% for party, votes in sorted_parties[1:] %}
+                    <div class="candidate-card">
+                        <img src="{{ url_for('static', filename='images/party.png') }}" alt="Party">
+                        <h4>{{ party }}</h4>
+                        <div class="vote-bar">
+                            <div class="progress-fill" data-percentage="{{ (votes/total_votes*100)|round(1) }}"></div>
+                        </div>
+                        <div class="vote-info">
+                            <span class="vote-count">{{ "{:,}".format(votes) }} votes</span>
+                            <span class="vote-percent">{{ "%.1f"|format(votes/total_votes*100) }}%</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="error-message">
+                <h2>No voting data available</h2>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.progress-fill').forEach(bar => {
+                const percentage = bar.getAttribute('data-percentage');
+                setTimeout(() => bar.style.width = percentage + '%', 100);
+            });
+        });
+    </script>
+
+    <footer class="navbar" style="position: relative; bottom: 0; top: auto; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px)">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span>© 2025 National Election Commission</span>
+            </div>
+            <div class="nav-links">
+                <span>All Rights Reserved</span>
+                <span>|</span>
+                <span>Electoral Integrity Protected</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

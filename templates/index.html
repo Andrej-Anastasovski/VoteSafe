@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoteSafe - Secure Electronic Voting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="index-page">
+    <nav class="large-navbar">
+        <div class="nav-container">
+            <h1>Welcome to the 2025 Elections</h1>
+            <div class="nav-options">
+                <a href="{{ url_for('register') }}" class="nav-btn">Vote</a>
+                <a href="{{ url_for('aggresults') }}" class="nav-btn">Results</a>
+            </div>
+        </div>
+    </nav>
+    <div class="main-content">
+    </div>
+
+    <footer class="navbar" style="position: fixed; bottom: 0; top: auto; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px)">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span>© 2025 National Election Commission</span>
+            </div>
+            <div class="nav-links">
+                <span>All Rights Reserved</span>
+                <span>|</span>
+                <span>Electoral Integrity Protected</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

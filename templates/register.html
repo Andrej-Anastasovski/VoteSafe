@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - VoteSafe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand"><div class="nav-brand"><a href="{{ url_for('index') }}" class="nav-link">VoteSafe</a></div></div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('aggresults') }}" class="nav-link">Results</a>
+            </div>
+        </div>
+    </nav>
+    <div class="register-container">
+        <h1>Voter Registration</h1>
+        <form method="POST" class="register-form">
+            <div class="form-group">
+                <label for="voter_id">Enter your EGN/LNC/ID to Vote.</label>
+                <input type="text" 
+                       name="voter_id" 
+                       id="voter_id"
+                       required 
+                       pattern="\d{10}" 
+                       maxlength="10"
+                       placeholder="Enter your Voter ID">
+            </div>
+            <button type="submit" class="register-btn">Proceed to Vote</button>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <footer class="navbar" style="position: fixed; bottom: 0; top: auto; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px)">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span>© 2025 National Election Commission</span>
+            </div>
+            <div class="nav-links">
+                <span>All Rights Reserved</span>
+                <span>|</span>
+                <span>Electoral Integrity Protected</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

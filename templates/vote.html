@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote - VoteSafe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    
+    <div class="vote-container">
+        <h1>Cast Your Vote</h1>
+        <form method="POST" class="vote-form">
+            <div class="vote-section">
+                <h2>Presidential Candidates</h2>
+                <div class="candidates-grid">
+                    {% for i in range(1, 5) %}
+                    <div class="candidate-option">
+                        <input type="radio" name="president" value="President{{ i }}" id="president{{ i }}" required>
+                        <label for="president{{ i }}">
+                            <img src="{{ url_for('static', filename='images/president.png') }}" alt="President {{ i }}">
+                            <span>President {{ i }}</span>
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="vote-section">
+                <h2>Political Parties</h2>
+                <div class="candidates-grid">
+                    {% for i in range(1, 5) %}
+                    <div class="candidate-option">
+                        <input type="radio" name="party" value="Party{{ i }}" id="party{{ i }}" required>
+                        <label for="party{{ i }}">
+                            <img src="{{ url_for('static', filename='images/party.png') }}" alt="Party {{ i }}">
+                            <span>Party {{ i }}</span>
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <button type="submit" class="vote-btn">Submit Vote</button>
+        </form>
+    </div>
+</body>
+
+<footer class="navbar" style="position: relative; bottom: 0; top: auto; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px)">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <span>© 2025 National Election Commission</span>
+        </div>
+        <div class="nav-links">
+            <span>All Rights Reserved</span>
+            <span>|</span>
+            <span>Electoral Integrity Protected</span>
+        </div>
+    </div>
+</footer>
+</html>

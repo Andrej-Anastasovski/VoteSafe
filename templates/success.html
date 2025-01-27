@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5;url={{ url_for('index') }}">
+    <title>Vote Successful - VoteSafe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .success-container {
+            text-align: center;
+            padding: 50px;
+            margin-top: 100px;
+        }
+        .success-message {
+            color: #28a745;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-message">
+            <h1>✓ Your vote has been recorded successfully!</h1>
+            <p>Your vote is important. Your vote is secure.</p>
+            <p>Redirecting to home page...</p>
+        </div>
+    </div>
+
+    <footer class="navbar" style="position: fixed; bottom: 0; top: auto; background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px)">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span>© 2025 National Election Commission</span>
+            </div>
+            <div class="nav-links">
+                <span>All Rights Reserved</span>
+                <span>|</span>
+                <span>Electoral Integrity Protected</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
