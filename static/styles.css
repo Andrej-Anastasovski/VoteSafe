@@ -540,8 +540,6 @@ h1 {
     background: #1976D2;
 }
 
-/* ...existing code... */
-
 .winner-section {
     display: flex;
     flex-direction: column;
